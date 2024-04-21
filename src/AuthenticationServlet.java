@@ -39,9 +39,7 @@ public class AuthenticationServlet extends HttpServlet {
                         System.out.println("We did it");
                     } else {
                         // Authentication failed, redirect to error page
-                        //response.sendRedirect("errorpage.html");
-                        System.out.println("No");
-
+                        response.sendRedirect("errorpage.html");
                     }
                 }
             }
