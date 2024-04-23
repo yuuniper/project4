@@ -1,3 +1,10 @@
+<!--
+Name: Alice Yu
+Course: CNT 4714 – Spring 2024 – Project Four
+Assignment title: A Three-Tier Distributed Web-Based Application
+Date: April 23, 2024
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

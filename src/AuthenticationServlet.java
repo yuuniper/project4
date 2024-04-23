@@ -26,7 +26,7 @@ public class AuthenticationServlet extends HttpServlet {
         String dbPassword = "Mochi123";
 
         try {
-          DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             Connection conn = DriverManager.getConnection(url, dbUsername, dbPassword);
             String query = "SELECT * FROM usercredentials WHERE login_username=? AND login_password=?";
             try (PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -34,9 +34,21 @@ public class AuthenticationServlet extends HttpServlet {
                 pstmt.setString(2, password);
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
-                        // Authentication successful, redirect to success page
-                        //response.sendRedirect("success.jsp");
-                        System.out.println("We did it");
+                        // Authentication successful, redirect based on username
+                        if ("root".equals(username)) {
+                            response.sendRedirect("rootHome.jsp");
+                        } else if ("client".equals(username)) {
+                            response.sendRedirect("clientHome.jsp");
+                        }
+                            else if ("dataentryuser".equals(username)) {
+                                response.sendRedirect("dataEntryHome.jsp");
+                        } else if ("theaccountant".equals(username)) {
+                            response.sendRedirect("accountHome.jsp");
+                        }else {
+                            // Handle other usernames if needed
+                            // For now, redirect to a generic success page
+                            response.sendRedirect("success.jsp");
+                        }
                     } else {
                         // Authentication failed, redirect to error page
                         response.sendRedirect("errorpage.html");
@@ -47,7 +59,7 @@ public class AuthenticationServlet extends HttpServlet {
             ex.printStackTrace();
             // Handle database connection errors
         }
-
-
     }
+
+
 }
